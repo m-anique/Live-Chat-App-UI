@@ -26,7 +26,7 @@ export function MessageBubble({ message, isOwn }: { message: Message; isOwn: boo
               isOwn ? "bg-primary-foreground/10" : "bg-background/60",
             )}
           >
-            {message.attachment.type.startsWith("image/") ? (
+            {message.attachment.type?.startsWith("image/") ? (
               <img
                 src={message.attachment.url}
                 alt={message.attachment.name}
