@@ -101,7 +101,13 @@ export function DashboardPage() {
         senderName,
         content: backendMsg.text,
         createdAt: backendMsg.createdAt,
-        attachment: backendMsg.fileUrl ? { url: backendMsg.fileUrl } : undefined,
+attachment: backendMsg.fileUrl
+  ? {
+      url: backendMsg.fileUrl,
+      name: backendMsg.fileUrl.split("/").pop() || "file",
+      type: /\.(png|jpe?g|gif|webp)$/i.test(backendMsg.fileUrl) ? "image/*" : "application/octet-stream",
+    }
+  : undefined,
       };
 
       setMessagesByConv((prev) => ({
