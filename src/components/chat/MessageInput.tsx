@@ -27,12 +27,32 @@ export function MessageInput({
     setAttachment(null);
   };
 
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const url = URL.createObjectURL(file);
-    setAttachment({ name: file.name, url, type: file.type });
-  };
+const [uploading, setUploading] = useState(false);
+
+const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  setUploading(true);
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const res = await api.post("/upload", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    setAttachment({
+      name: file.name,
+      url: res.data.fileUrl,
+      type: file.type,
+    });
+  } catch (err) {
+    console.error("Upload failed:", err);
+  } finally {
+    setUploading(false);
+  }
+};
 
   return (
     <form onSubmit={handleSubmit} className="border-t bg-card p-3 flex flex-col gap-2">
