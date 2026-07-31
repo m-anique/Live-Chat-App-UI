@@ -57,6 +57,7 @@ const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
 
   return (
     <form onSubmit={handleSubmit} className="border-t bg-card p-3 flex flex-col gap-2">
+      {uploading && <span className="text-xs text-muted-foreground">Uploading…</span>}
       {attachment && (
         <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2 text-sm">
           <Paperclip className="h-4 w-4" />
