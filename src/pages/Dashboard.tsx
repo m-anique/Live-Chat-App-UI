@@ -29,9 +29,9 @@ export function DashboardPage() {
   const { socket } = useSocket();
   const navigate = useNavigate();
 
-  const [users, setUsers] = useState<ChatUser[]>(MOCK_USERS);
+  const [users, setUsers] = useState<ChatUser[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
-  const [messagesByConv, setMessagesByConv] = useState<Record<string, Message[]>>(MOCK_MESSAGES);
+  const [messagesByConv, setMessagesByConv] = useState<Record<string, Message[]>>({});
   const [loadingMessages, setLoadingMessages] = useState(false);
   const [typingConv, setTypingConv] = useState<string | null>(null);
   const typingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
