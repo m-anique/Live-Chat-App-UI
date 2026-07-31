@@ -46,12 +46,12 @@ export function DashboardPage() {
   // Load users from API (falls back to mock on failure)
   useEffect(() => {
     if (!token) return;
-    usersApi
-      .list()
-      .then((data) => data.length && setUsers(data))
-      .catch(() => {
-        /* keep mock data */
-      });
+   usersApi
+  .list()
+  .then((data) => setUsers(data))
+  .catch(() => {
+    toast.error("Failed to load users");
+  });
   }, [token]);
 
   // Load messages for active conversation
